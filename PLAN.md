@@ -11,13 +11,15 @@ Leyenda: 🅰️ Persona A (frontend) · 🅱️ Persona B (backend) · 🤝 Amb
 
 Hacer esto **juntos, antes de dividirse**, porque ambos flujos dependen de esto.
 
-- [ ] Registrar la app en Azure AD (Entra ID) — o confirmar que ya existe una para el equipo
-- [ ] Definir **App Roles** en el manifiesto: `Admin`, `Operador`, `Cliente`
-- [ ] Asignar al menos un usuario de prueba a cada rol (Enterprise Applications → Users and groups)
-- [ ] Configurar Redirect URI tipo SPA (`http://localhost:5173` o el puerto de Vite) con Authorization Code + PKCE
-- [ ] Anotar `tenantId`, `clientId`, `authority`, `redirectUri` en un lugar compartido **fuera del repo** (ej. gestor de contraseñas, no Slack/WhatsApp en texto plano si se puede evitar)
-- [ ] Cada integrante crea su propio `.env` local (ignorado por git) con esos valores
-- [ ] Verificar manualmente: obtener un id_token de prueba (ej. vía [jwt.ms](https://jwt.ms) tras un login de prueba) y confirmar que el claim `roles` aparece con el rol asignado
+- [x] Registrar la app en Azure AD (Entra ID) — `Pedidos360-SPA`, tenant propio (cuenta personal, sin tenant institucional por falta de permisos de admin)
+- [x] Definir **App Roles** en el manifiesto: `Admin`, `Operador`, `Cliente`
+- [x] Asignar al menos un usuario de prueba a cada rol (Enterprise Applications → Users and groups)
+- [x] Configurar Redirect URI tipo SPA (`http://localhost:5173`) con Authorization Code + PKCE
+- [x] Anotar `tenantId`, `clientId`, `authority`, `redirectUri` en un lugar compartido **fuera del repo**
+- [ ] Cada integrante crea su propio `.env` local (ignorado por git) con esos valores — pendiente hasta que exista el proyecto (Fase 1)
+- [x] Verificar manualmente: id_token vía [jwt.ms](https://jwt.ms) y confirmar que el claim `roles` aparece con el rol asignado (`"roles": ["Admin"]` confirmado)
+
+**Paso 0 completo ✅** — queda pendiente únicamente crear el `.env` local de cada integrante, lo cual se hace naturalmente al arrancar la Fase 1.
 
 **Sin esto, ninguno de los dos flujos de abajo puede completarse de verdad** (frontend no puede leer rol, backend no puede validar rol) — pero ambos pueden avanzar en paralelo con la estructura/base mientras se termina de configurar.
 
