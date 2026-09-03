@@ -28,7 +28,7 @@ Hacer esto **juntos, antes de dividirse**, porque ambos flujos dependen de esto.
 ## Paso 1 — Streams en paralelo
 
 ### 🅰️ Frontend (`pedidos360-frontend`) — Fases 1-4 del SDD
-- [ ] Fase 1: Proyecto React + Vite, base visual sin auth
+- [x] Fase 1: Proyecto React + Vite, base visual sin auth
 - [ ] Fase 2: Integrar MSAL (`@azure/msal-browser`, `@azure/msal-react`), login/logout funcional
 - [ ] Fase 3: Rutas protegidas + lectura de rol desde `idTokenClaims`
 - [ ] Fase 4: Cliente HTTP (axios) con interceptor que adjunta JWT automáticamente
