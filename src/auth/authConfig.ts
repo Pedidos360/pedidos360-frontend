@@ -51,3 +51,12 @@ export const msalConfig: Configuration = {
 export const loginRequest = {
   scopes: ["openid", "profile", "email"],
 };
+
+// Scope del API expuesto por el BFF/App Registration (ej: api://<clientId>/access_as_user).
+// Se usa para adquirir el access token que se envía al backend (SDD §16).
+// Mientras no esté definido, se cae a los scopes del login.
+const apiScope = import.meta.env.VITE_API_SCOPE;
+
+export const apiRequest = {
+  scopes: apiScope ? [apiScope] : loginRequest.scopes,
+};
