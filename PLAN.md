@@ -29,8 +29,8 @@ Hacer esto **juntos, antes de dividirse**, porque ambos flujos dependen de esto.
 
 ### 🅰️ Frontend (`pedidos360-frontend`) — Fases 1-4 del SDD
 - [x] Fase 1: Proyecto React + Vite, base visual sin auth
-- [ ] Fase 2: Integrar MSAL (`@azure/msal-browser`, `@azure/msal-react`), login/logout funcional
-- [ ] Fase 3: Rutas protegidas + lectura de rol desde `idTokenClaims`
+- [x] Fase 2: Integrar MSAL (`@azure/msal-browser`, `@azure/msal-react`), login/logout funcional (Client/Tenant vía variables de entorno)
+- [x] Fase 3: Rutas protegidas + lectura de rol desde `idTokenClaims` (`ProtectedRoute`, `RoleGuard`, `Navbar`, router)
 - [ ] Fase 4: Cliente HTTP (axios) con interceptor que adjunta JWT automáticamente
 
 ### 🅱️ Backend (`pedidos360-backend`) — Fases 5-7 del SDD
