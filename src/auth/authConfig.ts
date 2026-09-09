@@ -3,12 +3,24 @@ import {
   type Configuration,
 } from "@azure/msal-browser";
 
+// Client y Tenant se leen desde variables de entorno (SDD §32).
+// Nunca se hardcodean en el código fuente.
+const clientId = import.meta.env.VITE_CLIENT_ID;
+const tenantId = import.meta.env.VITE_TENANT_ID;
+const redirectUri = import.meta.env.VITE_REDIRECT_URI;
+
+if (!clientId || !tenantId || !redirectUri) {
+  throw new Error(
+    "Faltan variables de entorno MSAL. Revisa tu .env (VITE_CLIENT_ID, VITE_TENANT_ID, VITE_REDIRECT_URI)."
+  );
+}
+
 export const msalConfig: Configuration = {
   auth: {
-    clientId: "28cc3d1b-1fa0-4909-b352-3f6bf2efec1b",
-    authority: "https://login.microsoftonline.com/3be234d1-0c64-484a-bc77-9478be48280f",
-    redirectUri: "http://localhost:5173",
-    postLogoutRedirectUri: "http://localhost:5173",
+    clientId,
+    authority: `https://login.microsoftonline.com/${tenantId}`,
+    redirectUri,
+    postLogoutRedirectUri: redirectUri,
   },
 
   cache: {

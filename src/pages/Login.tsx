@@ -1,24 +1,23 @@
-import { useMsal } from "@azure/msal-react";
+import { useAuth } from "../auth/authService";
 
-export function useAuth() {
-  const { instance, accounts } = useMsal();
+export default function Login() {
+  const { isAuthenticated, account, login, logout } = useAuth();
 
-  const handleLogin = () => {
-    instance.loginRedirect({
-      scopes: ["User.Read"],
-    });
-  };
+  return (
+    <main className="login">
+      <h1>Pedidos360</h1>
 
-  const handleLogout = () => {
-    instance.logoutRedirect({
-      postLogoutRedirectUri: "/",
-    });
-  };
-
-  return {
-    isAuthenticated: accounts.length > 0,
-    account: accounts[0] || null,
-    login: handleLogin,
-    logout: handleLogout,
-  };
+      {isAuthenticated ? (
+        <>
+          <p>Sesión iniciada como {account?.name ?? account?.username}</p>
+          <button onClick={logout}>Cerrar sesión</button>
+        </>
+      ) : (
+        <>
+          <p>Inicia sesión con tu cuenta corporativa (Microsoft Entra ID).</p>
+          <button onClick={login}>Iniciar sesión</button>
+        </>
+      )}
+    </main>
+  );
 }
