@@ -14,21 +14,31 @@ export default function AuthProvider({ children }: Props) {
     const initialize = async () => {
       await msalInstance.initialize();
 
+      // Procesa la respuesta de un redirect (vuelta desde Microsoft).
+      // Si Microsoft devolvió un error, se ve aquí en consola.
+      try {
+        const result = await msalInstance.handleRedirectPromise();
+        if (result?.account) {
+          msalInstance.setActiveAccount(result.account);
+        }
+      } catch (error) {
+        console.error("Error procesando el redirect de MSAL:", error);
+      }
+
       // Si ya hay una cuenta en caché, la marcamos como activa.
       const accounts = msalInstance.getAllAccounts();
-      if (accounts.length > 0) {
+      if (accounts.length > 0 && !msalInstance.getActiveAccount()) {
         msalInstance.setActiveAccount(accounts[0]);
       }
 
-      // Al completarse un login, fijamos la cuenta activa para que
-      // el interceptor pueda adquirir el token silenciosamente.
+      // Al completarse (o fallar) un login, lo reflejamos / lo mostramos.
       msalInstance.addEventCallback((event) => {
-        if (
-          event.eventType === EventType.LOGIN_SUCCESS &&
-          event.payload
-        ) {
+        if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
           const payload = event.payload as AuthenticationResult;
           msalInstance.setActiveAccount(payload.account);
+        }
+        if (event.eventType === EventType.ACQUIRE_TOKEN_FAILURE) {
+          console.error("Fallo de autenticación MSAL:", event.error);
         }
       });
 

@@ -16,8 +16,13 @@ export function useAuth() {
     | undefined;
   const roles = (claims?.roles ?? []) as Role[];
 
-  const login = () => {
-    instance.loginRedirect(loginRequest);
+  const login = async () => {
+    try {
+      await instance.loginRedirect(loginRequest);
+    } catch (error) {
+      // Si el redirect falla antes de navegar, se ve aquí en consola.
+      console.error("Error al iniciar loginRedirect:", error);
+    }
   };
 
   const logout = () => {
