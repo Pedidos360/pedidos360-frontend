@@ -12,8 +12,12 @@ import Unauthorized from "./pages/Unauthorized";
 function ProtectedLayout() {
   return (
     <ProtectedRoute>
-      <Navbar />
-      <Outlet />
+      <div className="app-shell">
+        <Navbar />
+        <div className="container">
+          <Outlet />
+        </div>
+      </div>
     </ProtectedRoute>
   );
 }

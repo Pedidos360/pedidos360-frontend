@@ -15,13 +15,10 @@ export default function Pedidos() {
 
     getPedidos()
       .then((data) => {
-        if (!cancelled) {
-          setPedidos(data);
-        }
+        if (!cancelled) setPedidos(data);
       })
       .catch((err) => {
         if (cancelled) return;
-
         const status = err instanceof AxiosError ? err.response?.status : undefined;
         switch (status) {
           case 401:
@@ -35,9 +32,7 @@ export default function Pedidos() {
         }
       })
       .finally(() => {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       });
 
     return () => {
@@ -45,39 +40,61 @@ export default function Pedidos() {
     };
   }, []);
 
-  return (
-    <main className="page">
-      <h1>Pedidos</h1>
+  const badgeClass = (estado: string) =>
+    "badge badge--" + estado.toLowerCase().replace(/\s+/g, "_");
 
-      {loading && <p>Cargando pedidos...</p>}
-      {error && <p className="error">{error}</p>}
+  return (
+    <section>
+      <div className="page-head">
+        <h1>Pedidos</h1>
+        <p>Listado de pedidos obtenido desde el backend.</p>
+      </div>
+
+      {loading && (
+        <div className="card">
+          <div className="state">
+            <div className="spinner" aria-hidden="true"></div>
+            <span>Cargando pedidos…</span>
+          </div>
+        </div>
+      )}
+
+      {!loading && error && (
+        <div className="alert" role="alert">
+          <strong>Error.</strong> {error}
+        </div>
+      )}
 
       {!loading && !error && (
         pedidos.length === 0 ? (
-          <p>No hay pedidos registrados.</p>
+          <div className="card">
+            <div className="state">No hay pedidos registrados.</div>
+          </div>
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Cliente</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pedidos.map((pedido) => (
-                <tr key={pedido.id}>
-                  <td>{pedido.id}</td>
-                  <td>{pedido.cliente}</td>
-                  <td>{pedido.fecha}</td>
-                  <td>{pedido.estado}</td>
+          <div className="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {pedidos.map((pedido) => (
+                  <tr key={pedido.id}>
+                    <td className="id">#{pedido.id}</td>
+                    <td>{pedido.cliente}</td>
+                    <td>{pedido.fecha}</td>
+                    <td><span className={badgeClass(pedido.estado)}>{pedido.estado}</span></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )
       )}
-    </main>
+    </section>
   );
 }

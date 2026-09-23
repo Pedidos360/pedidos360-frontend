@@ -11,9 +11,15 @@ export default function Login() {
 
   return (
     <main className="login">
-      <h1>Pedidos360</h1>
-      <p>Inicia sesión con tu cuenta corporativa (Microsoft Entra ID).</p>
-      <button onClick={login}>Iniciar sesión</button>
+      <div className="login-card">
+        <div className="login-logo" aria-hidden="true">P</div>
+        <h1>Pedidos360</h1>
+        <p>Sistema de gestión de pedidos</p>
+        <button className="btn btn-primary btn-lg" onClick={login}>
+          Iniciar sesión con Microsoft
+        </button>
+        <p className="login-hint">Acceso corporativo con Microsoft Entra ID</p>
+      </div>
     </main>
   );
 }
