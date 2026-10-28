@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+﻿import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RoleGuard from "./components/RoleGuard";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Pedidos from "./pages/Pedidos";
+import FlujoEnVivo from "./pages/FlujoEnVivo";
 import Admin from "./pages/Admin";
 import Unauthorized from "./pages/Unauthorized";
 
-// Layout de las rutas autenticadas: exige sesión y muestra el Navbar.
+// Layout de las rutas autenticadas: exige sesiÃ³n y muestra el Navbar.
 function ProtectedLayout() {
   return (
     <ProtectedRoute>
@@ -22,7 +23,7 @@ function ProtectedLayout() {
   );
 }
 
-// Enrutado y rutas protegidas (SDD §15).
+// Enrutado y rutas protegidas (SDD Â§15).
 export default function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,7 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/flujo" element={<FlujoEnVivo />} />
           <Route
             path="/admin"
             element={
@@ -49,3 +51,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+

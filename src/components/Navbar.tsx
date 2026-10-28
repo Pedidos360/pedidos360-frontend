@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 import { useAuth } from "../auth/authService";
 
-// Navbar según rol (SDD §11.1, Paso 15): muestra enlaces de acuerdo a los
-// roles del usuario y permite cerrar sesión.
+// Navbar segÃºn rol (SDD Â§11.1, Paso 15): muestra enlaces de acuerdo a los
+// roles del usuario y permite cerrar sesiÃ³n.
 export default function Navbar() {
   const { isAuthenticated, account, roles, hasRole, logout } = useAuth();
 
@@ -23,17 +23,19 @@ export default function Navbar() {
       <nav className="navbar__links">
         <NavLink to="/home">Inicio</NavLink>
         <NavLink to="/pedidos">Pedidos</NavLink>
-        {hasRole("Admin") && <NavLink to="/admin">Administración</NavLink>}
+        <NavLink to="/flujo">Flujo en vivo</NavLink>
+        {hasRole("Admin") && <NavLink to="/admin">AdministraciÃ³n</NavLink>}
       </nav>
 
       <div className="navbar__user">
         <span className="avatar" aria-hidden="true">{inicial}</span>
         <div className="who">
           <span className="who__name">{nombre}</span>
-          {roles.length > 0 && <span className="role-badge">{roles.join(" · ")}</span>}
+          {roles.length > 0 && <span className="role-badge">{roles.join(" Â· ")}</span>}
         </div>
         <button className="btn btn-ghost" onClick={logout}>Salir</button>
       </div>
     </header>
   );
 }
+

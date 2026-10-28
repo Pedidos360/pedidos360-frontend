@@ -1,0 +1,48 @@
+.flow-page { display:grid; gap:18px; }
+.flow-eyebrow { display:block; font-size:11px; font-weight:800; letter-spacing:.12em; color:var(--accent); margin-bottom:7px; }
+.flow-banner { display:flex; align-items:center; gap:11px; font-size:13px; border:1px solid var(--border); background:var(--surface); padding:12px 16px; border-radius:12px; color:var(--muted); }
+.flow-dot { width:9px; height:9px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 4px var(--ok-soft); }
+.flow-layout { display:grid; grid-template-columns:minmax(250px,.83fr) minmax(330px,1.17fr); gap:18px; }
+.flow-page .card { min-width:0; }
+.flow-page h2 { font-size:17px; margin-bottom:8px; }
+.flow-form-card > p, .flow-manual p { font-size:13px; color:var(--muted); line-height:1.6; }
+.flow-form { display:grid; gap:15px; margin:23px 0 14px; }
+.flow-form label { display:grid; gap:5px; font-size:12px; font-weight:700; color:var(--muted); }
+.flow-form input, .flow-form select { width:100%; border:1px solid var(--border); border-radius:10px; padding:11px 12px; background:var(--surface); color:var(--ink); font:inherit; font-weight:500; }
+.flow-form input:focus, .flow-form select:focus { outline:2px solid var(--ring); border-color:var(--accent); }
+.flow-form button { justify-content:center; }
+.flow-form button:disabled { opacity:.55; cursor:progress; }
+.flow-subtle { font-size:12px; color:var(--muted); margin-top:16px; line-height:1.6; }
+.flow-created { display:grid; gap:3px; margin-top:14px; background:var(--ok-soft); color:var(--ok); padding:12px; border-radius:10px; font-size:13px; }
+.flow-section-head { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:20px; }
+.flow-section-head h2 { margin:0; }
+.flow-section-head > span { font-size:11px; font-weight:700; color:var(--muted); }
+.flow-steps { display:grid; }
+.flow-step { display:flex; align-items:start; gap:12px; position:relative; padding-bottom:25px; }
+.flow-step:not(:last-child):before { content:""; position:absolute; top:29px; bottom:0; left:14px; width:2px; background:var(--border); }
+.flow-step-number { position:relative; z-index:1; flex:0 0 30px; height:30px; display:grid; place-items:center; border-radius:10px; background:var(--surface-2); color:var(--muted); font-size:12px; font-weight:800; }
+.flow-step--confirmed .flow-step-number { background:var(--ok-soft); color:var(--ok); }
+.flow-step--failed .flow-step-number { background:var(--err-soft); color:var(--err); }
+.flow-step--running .flow-step-number { background:var(--accent-soft); color:var(--accent); }
+.flow-step--unverified .flow-step-number { background:var(--warn-soft); color:var(--warn); }
+.flow-step-body { display:grid; gap:3px; min-width:0; flex:1; padding-top:2px; }
+.flow-step-body strong { font-size:13px; }
+.flow-step-body span { font-size:12px; color:var(--muted); overflow-wrap:anywhere; }
+.flow-step-state { white-space:nowrap; font-size:10px; font-weight:800; color:var(--muted); padding-top:6px; }
+.flow-step--confirmed .flow-step-state { color:var(--ok); }
+.flow-step--failed .flow-step-state { color:var(--err); }
+.flow-step--unverified .flow-step-state { color:var(--warn); }
+.flow-note { background:var(--surface-2); padding:13px; border-radius:10px; font-size:12px; line-height:1.6; color:var(--muted); }
+.flow-secondary { grid-template-columns:1fr 1fr; }
+.flow-log { display:grid; gap:12px; font-size:12px; }
+.flow-log > div { display:flex; gap:10px; }
+.flow-log time { font-family:var(--mono); color:var(--muted); flex-shrink:0; }
+.flow-products { display:grid; }
+.flow-products > div { display:flex; justify-content:space-between; gap:8px; padding:9px 0; font-size:13px; border-bottom:1px solid var(--border); }
+.flow-products > div:last-child { border-bottom:0; }
+.flow-empty { color:var(--muted); font-size:13px; }
+.flow-manual { display:grid; gap:10px; }
+.flow-manual h2 { margin:0; }
+.flow-manual code { font-family:var(--mono); font-size:11px; overflow-wrap:anywhere; }
+.flow-manual > code { display:block; background:var(--surface-2); padding:12px; border-radius:9px; }
+@media(max-width:720px) { .flow-layout,.flow-secondary { grid-template-columns:1fr; } .flow-step-state { font-size:9px; } }
