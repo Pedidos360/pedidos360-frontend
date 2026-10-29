@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Pedidos from "./pages/Pedidos";
+import Tienda from "./pages/Tienda";
 import FlujoEnVivo from "./pages/FlujoEnVivo";
 import Admin from "./pages/Admin";
 import Unauthorized from "./pages/Unauthorized";
@@ -34,6 +35,7 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/tienda" element={<Tienda />} />
           <Route path="/flujo" element={<FlujoEnVivo />} />
           <Route
             path="/admin"
@@ -51,4 +53,5 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
 

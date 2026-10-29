@@ -23,6 +23,7 @@ export default function Navbar() {
       <nav className="navbar__links">
         <NavLink to="/home">Inicio</NavLink>
         <NavLink to="/pedidos">Pedidos</NavLink>
+        <NavLink to="/tienda">Tienda</NavLink>
         <NavLink to="/flujo">Flujo en vivo</NavLink>
         {hasRole("Admin") && <NavLink to="/admin">AdministraciÃ³n</NavLink>}
       </nav>
@@ -38,4 +39,5 @@ export default function Navbar() {
     </header>
   );
 }
+
 
