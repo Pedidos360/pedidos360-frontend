@@ -1,0 +1,58 @@
+.store-page { display: flex; flex-direction: column; gap: 24px; }
+.store-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.store-heading h1 { font-size: clamp(25px, 4vw, 34px); margin: 4px 0; }
+.store-heading p, .store-muted, .store-note { color: var(--muted); }
+.store-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .12em; color: var(--accent); }
+.store-cart-count { border-radius: 999px; background: var(--accent-soft); color: var(--accent); padding: 9px 14px; font-size: 13px; font-weight: 700; }
+.store-layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 22px; align-items: start; }
+.store-main { min-width: 0; }
+.store-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+.store-filters input, .store-filters select, .store-checkout-form input, .store-checkout-form textarea {
+  font: inherit; color: var(--ink); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+}
+.store-filters input { flex: 1 1 200px; min-width: 0; }
+.store-filters select { flex: 0 1 180px; min-width: 120px; }
+.store-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(185px, 1fr)); gap: 14px; }
+.store-card, .store-cart {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); box-shadow: var(--shadow-sm);
+}
+.store-card { display: flex; flex-direction: column; gap: 8px; padding: 14px; }
+.store-illustration { display: grid; place-items: center; height: 105px; background: var(--surface-2); border-radius: 11px; font-size: 44px; }
+.store-category { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+.store-card h2 { font-size: 15px; line-height: 1.35; min-height: 40px; }
+.store-card strong { font-size: 19px; }
+.store-add, .store-checkout {
+  cursor: pointer; border: 0; border-radius: 10px; background: var(--accent);
+  color: var(--accent-ink); font: inherit; font-weight: 700; padding: 11px 13px;
+}
+.store-add { margin-top: auto; }
+.store-cart { padding: 20px; position: sticky; top: 95px; }
+.store-cart > h2 { font-size: 21px; margin-bottom: 15px; }
+.store-cart-lines { display: flex; flex-direction: column; gap: 14px; }
+.store-cart-line { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.store-cart-line strong { display: block; font-size: 13px; line-height: 1.4; }
+.store-cart-line small { display: block; color: var(--muted); font-size: 12px; }
+.store-quantity { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+.store-quantity button { background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px; color: var(--ink); cursor: pointer; width: 29px; height: 29px; }
+.store-quantity span { font-size: 13px; font-weight: 700; min-width: 15px; text-align: center; }
+.store-total { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 15px; margin-top: 18px; gap: 8px; }
+.store-total span { font-size: 13px; color: var(--muted); }
+.store-total strong { font-size: 20px; }
+.store-empty, .store-error, .store-success { padding: 14px; border-radius: 10px; font-size: 13px; }
+.store-empty { color: var(--muted); background: var(--surface-2); }
+.store-error { background: var(--err-soft); color: var(--err); }
+.store-success { background: var(--ok-soft); color: var(--ok); font-weight: 600; }
+.store-checkout-form { display: flex; flex-direction: column; gap: 11px; border-top: 1px solid var(--border); margin-top: 19px; padding-top: 18px; }
+.store-checkout-form h3 { font-size: 17px; }
+.store-checkout-form label { font-size: 12px; font-weight: 700; }
+.store-checkout-form input, .store-checkout-form textarea { width: 100%; min-width: 0; }
+.store-checkout-form input:focus, .store-checkout-form textarea:focus, .store-filters input:focus, .store-filters select:focus { outline: 2px solid var(--ring); outline-offset: 1px; }
+.store-add:disabled, .store-checkout:disabled, .store-quantity button:disabled { opacity: .55; cursor: not-allowed; }
+.store-note { font-size: 12px; line-height: 1.5; }
+@media (max-width: 760px) {
+  .store-layout { grid-template-columns: 1fr; }
+  .store-cart { position: static; }
+  .store-grid { grid-template-columns: repeat(auto-fit, minmax(165px, 1fr)); }
+}
