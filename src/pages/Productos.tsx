@@ -159,7 +159,8 @@ export default function Productos() {
       </header>
 
       <div className="store-layout">
-        <div className="store-main" id="catalogo">\n          <div className="store-section-head"><div><span className="store-section-kicker">EXPLORA</span><h2>El catálogo<span className="store-section-dot">.</span></h2></div><span className="store-collection-count">{productos.length} productos disponibles</span></div>
+        <div className="store-main" id="catalogo">
+          <div className="store-section-head"><div><span className="store-section-kicker">EXPLORA</span><h2>El catálogo<span className="store-section-dot">.</span></h2></div><span className="store-collection-count">{productos.length} productos disponibles</span></div>
           <div className="store-filters">
             <input
               type="search"
@@ -188,10 +189,11 @@ export default function Productos() {
             {!cargando && !error && visibles.map((producto) => (
               <article className="store-card" key={producto.id}>
                 <div className="store-illustration" aria-hidden="true">
-                  {producto.categoria.toLocaleLowerCase("es-CL").includes("celular")
-                    ? "📱"
-                    : producto.categoria.toLocaleLowerCase("es-CL").includes("pantalla")
-                      ? "🖥️" : "⌨️"}
+                  <span className="store-illustration__number">{String(producto.id).padStart(2, "0")}</span>
+                  <div className={`store-art store-art--${producto.categoria.toLocaleLowerCase("es-CL").includes("celular") ? "phone" : producto.nombre.toLocaleLowerCase("es-CL").includes("monitor") || producto.categoria.toLocaleLowerCase("es-CL").includes("pantalla") ? "display" : producto.nombre.toLocaleLowerCase("es-CL").includes("mouse") ? "mouse" : "keyboard"}`}>
+                    <span className="store-art__body" /><span className="store-art__detail" />
+                  </div>
+                  <span className="store-illustration__mark">P360®</span>
                 </div>
                 <span className="store-category">{producto.categoria}</span>
                 <h2>{producto.nombre}</h2>
