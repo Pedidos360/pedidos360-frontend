@@ -16,8 +16,8 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar__brand">
-        <span className="brand-dot" aria-hidden="true"></span>
-        Pedidos360
+        <span className="brand-dot" aria-hidden="true">P<span>●</span></span>
+        <span>pedidos<span className="navbar__brand-accent">360</span><small>®</small></span>
       </div>
 
       <nav className="navbar__links">
