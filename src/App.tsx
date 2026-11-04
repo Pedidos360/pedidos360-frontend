@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Pedidos from "./pages/Pedidos";
+import Productos from "./pages/Productos";
 import Admin from "./pages/Admin";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -33,6 +34,7 @@ export default function App() {
         <Route element={<ProtectedLayout />}>
           <Route path="/home" element={<Home />} />
           <Route path="/pedidos" element={<Pedidos />} />
+          <Route path="/productos" element={<Productos />} />
           <Route
             path="/admin"
             element={
