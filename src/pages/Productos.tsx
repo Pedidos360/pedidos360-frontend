@@ -32,31 +32,53 @@ export default function Productos() {
 
   useEffect(() => {
     let cancelled = false;
-    getCatalogo()
-      .then((data) => {
-        if (!cancelled) setProductos(data);
-      })
-      .catch(() => {
-        if (!cancelled) setError("No se pudo cargar el catálogo. Comprueba el BFF y tu sesión.");
-      })
-      .finally(() => {
+    const actualizar = async () => {
+      try {
+        const lista = await getCatalogo();
+        if (cancelled) return;
+        setProductos(lista);
+        setCarrito((actual) => {
+          const siguiente = { ...actual };
+          for (const id of Object.keys(siguiente)) {
+            const producto = lista.find((p) => p.id === Number(id));
+            if (!producto || producto.activo === false) delete siguiente[Number(id)];
+          }
+          return siguiente;
+        });
+        setError("");
+      } catch {
+        if (!cancelled) setError("No se pudo actualizar el catálogo. Comprueba el BFF y tu sesión.");
+      } finally {
         if (!cancelled) setCargando(false);
-      });
-    return () => { cancelled = true; };
+      }
+    };
+    const actualizarAlVolver = () => { if (document.visibilityState === "visible") void actualizar(); };
+    void actualizar();
+    const intervalo = window.setInterval(() => { if (document.visibilityState === "visible") void actualizar(); }, 30000);
+    document.addEventListener("visibilitychange", actualizarAlVolver);
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalo);
+      document.removeEventListener("visibilitychange", actualizarAlVolver);
+    };
   }, []);
 
-  const categorias = useMemo(
-    () => ["Todas", ...new Set(productos.map((producto) => producto.categoria))],
+  const productosDisponibles = useMemo(
+    () => productos.filter((producto) => producto.activo !== false),
     [productos]
   );
-  const visibles = productos.filter(
+  const categorias = useMemo(
+    () => ["Todas", ...new Set(productosDisponibles.map((producto) => producto.categoria))],
+    [productosDisponibles]
+  );
+  const visibles = productosDisponibles.filter(
     (producto) =>
       (categoria === "Todas" || producto.categoria === categoria) &&
       `${producto.nombre} ${producto.categoria}`
         .toLocaleLowerCase("es-CL")
         .includes(busqueda.toLocaleLowerCase("es-CL"))
   );
-  const lineas = productos.filter((producto) => (carrito[producto.id] ?? 0) > 0);
+  const lineas = productosDisponibles.filter((producto) => (carrito[producto.id] ?? 0) > 0);
   const cantidad = lineas.reduce((suma, producto) => suma + carrito[producto.id], 0);
   const total = lineas.reduce(
     (suma, producto) => suma + producto.precio * carrito[producto.id], 0
@@ -93,6 +115,7 @@ export default function Productos() {
       setErrorCompra("Ingresa un correo electrónico válido.");
       return;
     }
+    // El backend también debe validar disponibilidad antes de confirmar la compra.
     if (!lineas.length || lineas.length > MAX_LINEAS) {
       setErrorCompra("Selecciona entre 1 y 20 productos diferentes.");
       return;
@@ -110,6 +133,19 @@ export default function Productos() {
     envioEnCurso.current = true;
     setEnviando(true);
     try {
+      const catalogoActual = await getCatalogo();
+      setProductos(catalogoActual);
+      if (items.some((item) => !catalogoActual.some((p) => p.id === item.productoId && p.activo !== false))) {
+        setErrorCompra("Uno o más productos ya no están disponibles. Revisa tu carrito.");
+        setCarrito((actual) => {
+          const siguiente = { ...actual };
+          for (const id of Object.keys(siguiente)) {
+            if (!catalogoActual.some((p) => p.id === Number(id) && p.activo !== false)) delete siguiente[Number(id)];
+          }
+          return siguiente;
+        });
+        return;
+      }
       const pedido = await crearCompra({
         cliente: cliente.trim(),
         correo: correo.trim(),
@@ -160,7 +196,7 @@ export default function Productos() {
 
       <div className="store-layout">
         <div className="store-main" id="catalogo">
-          <div className="store-section-head"><div><span className="store-section-kicker">EXPLORA</span><h2>El catálogo<span className="store-section-dot">.</span></h2></div><span className="store-collection-count">{productos.length} productos disponibles</span></div>
+          <div className="store-section-head"><div><span className="store-section-kicker">EXPLORA</span><h2>El catálogo<span className="store-section-dot">.</span></h2></div><span className="store-collection-count">{productosDisponibles.length} productos disponibles</span></div>
           <div className="store-filters">
             <input
               type="search"
