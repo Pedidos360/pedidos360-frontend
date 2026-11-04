@@ -12,11 +12,11 @@ export default function Login() {
   return (
     <main className="login">
       <div className="login-card">
-        <div className="login-logo" aria-hidden="true">P</div>
+        <div className="login-logo" aria-hidden="true">P<span>●</span></div>
         <h1>Pedidos360</h1>
-        <p>Sistema de gestión de pedidos</p>
+        <p>Tu espacio para comprar y gestionar pedidos de forma simple.</p>
         <button className="btn btn-primary btn-lg" onClick={login}>
-          Iniciar sesión con Microsoft
+          Continuar con Microsoft →
         </button>
         <p className="login-hint">Acceso corporativo con Microsoft Entra ID</p>
       </div>
