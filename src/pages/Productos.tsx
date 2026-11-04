@@ -144,18 +144,23 @@ export default function Productos() {
   return (
     <section className="store-page">
       <header className="store-heading">
-        <div>
-          <span className="store-eyebrow">TIENDA · PEDIDOS360</span>
-          <h1>Catálogo de productos</h1>
-          <p>Explora productos y prepara tu pedido.</p>
+        <div className="store-heading__copy">
+          <span className="store-eyebrow"><span className="store-eyebrow__line" /> COLECCIÓN / 2026</span>
+          <h1>Tecnología para<br /><em>hacer más.</em></h1>
+          <p>Una selección simple de esenciales para tu espacio de trabajo. Elige lo que necesitas, nosotros nos encargamos del resto.</p>
+          <a className="store-heading__link" href="#catalogo">Explorar colección <span aria-hidden="true">↗</span></a>
         </div>
-        <span className="store-cart-count" aria-live="polite">
-          🛒 {cantidad} {cantidad === 1 ? "producto" : "productos"}
-        </span>
+        <div className="store-hero-art" aria-hidden="true">
+          <div className="store-hero-art__halo" />
+          <div className="store-hero-art__screen"><span>P / 360</span><i /></div>
+          <div className="store-hero-art__base" />
+          <span className="store-hero-art__label">HECHO PARA TU DÍA A DÍA <span>↗</span></span>
+        </div>
       </header>
 
       <div className="store-layout">
-        <div className="store-main">
+        <div className="store-main" id="catalogo">
+          <div className="store-section-head"><div><span className="store-section-kicker">EXPLORA</span><h2>El catálogo<span className="store-section-dot">.</span></h2></div><span className="store-collection-count">{productos.length} productos disponibles</span></div>
           <div className="store-filters">
             <input
               type="search"
@@ -184,21 +189,22 @@ export default function Productos() {
             {!cargando && !error && visibles.map((producto) => (
               <article className="store-card" key={producto.id}>
                 <div className="store-illustration" aria-hidden="true">
-                  {producto.categoria.toLocaleLowerCase("es-CL").includes("celular")
-                    ? "📱"
-                    : producto.categoria.toLocaleLowerCase("es-CL").includes("pantalla")
-                      ? "🖥️" : "⌨️"}
+                  <span className="store-illustration__number">{String(producto.id).padStart(2, "0")}</span>
+                  <div className={`store-art store-art--${producto.categoria.toLocaleLowerCase("es-CL").includes("celular") ? "phone" : producto.nombre.toLocaleLowerCase("es-CL").includes("monitor") || producto.categoria.toLocaleLowerCase("es-CL").includes("pantalla") ? "display" : producto.nombre.toLocaleLowerCase("es-CL").includes("mouse") ? "mouse" : "keyboard"}`}>
+                    <span className="store-art__body" /><span className="store-art__detail" />
+                  </div>
+                  <span className="store-illustration__mark">P360®</span>
                 </div>
                 <span className="store-category">{producto.categoria}</span>
                 <h2>{producto.nombre}</h2>
-                <strong>{CLP.format(producto.precio)}</strong>
+                <div className="store-card__bottom"><strong>{CLP.format(producto.precio)}</strong><span>Precio unitario</span></div>
                 <button
                   type="button"
                   className="store-add"
                   onClick={() => cambiarCantidad(producto.id, 1)}
                   disabled={enviando || (carrito[producto.id] ?? 0) >= MAX_CANTIDAD}
                 >
-                  Agregar al carrito
+                  Agregar al carrito <span aria-hidden="true">↗</span>
                 </button>
               </article>
             ))}
@@ -206,9 +212,9 @@ export default function Productos() {
         </div>
 
         <aside className="store-cart" aria-label="Carrito de compras">
-          <h2>Mi carrito</h2>
+          <div className="store-cart__head"><div><span className="store-section-kicker">TU SELECCIÓN</span><h2>Mi carrito<span className="store-section-dot">.</span></h2></div><span className="store-cart-count" aria-label={`${cantidad} unidades`}>{cantidad}</span></div>
           {lineas.length === 0
-            ? <p className="store-muted">Aún no has agregado productos.</p>
+            ? <p className="store-muted">Tu selección está vacía. Agrega algo que te guste para comenzar.</p>
             : (
               <div className="store-cart-lines">
                 {lineas.map((producto) => (
@@ -242,7 +248,7 @@ export default function Productos() {
           </div>
 
           <form className="store-checkout-form" onSubmit={confirmarCompra}>
-            <h3>Datos de entrega</h3>
+            <div className="store-checkout-head"><span className="store-section-kicker">ÚLTIMO PASO</span><h3>Datos de entrega</h3><p>Cuéntanos dónde recibirás tu compra.</p></div>
             <label htmlFor="compra-cliente">Nombre del cliente</label>
             <input
               id="compra-cliente"
@@ -282,7 +288,7 @@ export default function Productos() {
               type="submit"
               disabled={enviando || cargando || Boolean(error) || !lineas.length}
             >
-              {enviando ? "Procesando compra..." : "Confirmar compra"}
+              {enviando ? "Procesando compra..." : "Confirmar pedido →"}
             </button>
             <p className="store-note">
               Compra de demostración. El servidor valida los productos y calcula el total definitivo.

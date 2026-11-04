@@ -195,3 +195,67 @@ td.id { font-family: var(--mono); color: var(--muted); }
   background: var(--err-soft); color: var(--err); border: 1px solid transparent;
 }
 .alert strong { font-weight: 700; }
+
+/* Pedidos360 — minimalist identity */
+:root{
+  --bg:#f8f9f6;--surface:#fff;--surface-2:#f0f2ed;--ink:#1c2822;--muted:#79847c;--border:#e5eae3;
+  --accent:#42674c;--accent-ink:#fff;--accent-soft:#e6eee4;--ring:#85a98b5c;
+  --shadow-sm:0 1px 2px #192b2110;--shadow:0 8px 30px #192b210b;
+  --radius:16px;color-scheme:light;
+  --sans:"Inter", "Segoe UI", Arial, sans-serif;
+}
+body{background:var(--bg)}
+a{color:var(--accent)}
+.container{max-width:1440px;padding:clamp(24px,4vw,54px) clamp(18px,4vw,56px)}
+.navbar{padding:15px clamp(18px,4vw,56px);gap:clamp(22px,4vw,70px);background:#fffffff2;border-color:#e9ede7}
+.navbar__brand{font-size:20px;white-space:nowrap;letter-spacing:-.065em;font-weight:800}
+.navbar__brand-accent{color:#66936d}
+.navbar__brand small{font-size:9px;letter-spacing:0;vertical-align:top;margin-left:1px}
+.brand-dot{width:32px;height:32px;display:grid;place-items:center;background:#263a2e;color:#fff;border-radius:10px;font-size:17px;box-shadow:none;position:relative;letter-spacing:-.1em}
+.brand-dot span,.login-logo span{font-size:8px;color:#b2d4a3;position:absolute;top:7px;right:5px}
+.navbar__links{gap:7px}
+.navbar__links a{font-size:12px;font-weight:650;padding:10px 15px;border-radius:8px}
+.navbar__links a.active{color:#243d2b;background:#e9f0e7}
+.navbar__user .btn{font-size:12px;border-radius:8px}
+.avatar{background:#e5ece3;color:#395e41}
+.role-badge{font-size:9px;color:#6b806c}
+.btn-primary{background:#263a2e}.btn-primary:hover{background:#466550}
+.btn-ghost{border-color:#e5eae3}
+.login{background:radial-gradient(circle at 80% 10%,#e1eddd 0,transparent 35%),#f8f9f6}
+.login-card{box-shadow:0 25px 80px #213a2814;border-radius:22px;padding:46px 38px;max-width:420px}
+.login-logo{position:relative;background:#253a2d;box-shadow:none}
+.login-card h1{font-size:34px;letter-spacing:-.065em}
+.login-card>p{line-height:1.7}
+.card{box-shadow:0 8px 30px #192b210b}
+.chip{background:#e5ece3;color:#395e41}
+.page-head h1{letter-spacing:-.055em}
+.home-page{display:flex;flex-direction:column;gap:37px}
+.home-hero{position:relative;background:#1b2921;color:#fff;border-radius:26px;min-height:420px;overflow:hidden;display:grid;grid-template-columns:1fr .8fr}
+.home-hero__content{z-index:1;padding:clamp(35px,5vw,72px);max-width:650px}
+.home-hero h1{font-size:clamp(50px,6vw,85px);margin:22px 0}
+.home-hero__content>p{color:#b7c5b6;font-size:15px;line-height:1.85;max-width:410px}
+.home-hero__actions{display:flex;flex-wrap:wrap;align-items:center;gap:15px;margin-top:31px}
+.home-primary-link,.home-secondary-link{display:inline-flex;align-items:center;justify-content:space-between;gap:25px;padding:14px 19px;border-radius:9px;font-size:12px;font-weight:700}
+.home-primary-link{background:#c7e1b9;color:#203627}
+.home-secondary-link{color:#f5f5f2;border:1px solid #78917b}
+.home-primary-link:hover{background:#e1f2d5}.home-secondary-link:hover{background:#ffffff18}
+.home-hero__graphic{position:relative;display:grid;place-items:center;overflow:hidden}
+.home-hero__ring{position:absolute;border:1px solid #acc79a2e;border-radius:50%;width:440px;height:440px}
+.home-hero__ring--inner{width:290px;height:290px;border-color:#d1edb958}
+.home-hero__graphic>span{font-size:clamp(85px,11vw,164px);font-weight:650;letter-spacing:-.12em;color:#d9ebce;z-index:1}
+.home-hero__graphic>span span{font-size:.45em;vertical-align:top}
+.home-hero__graphic small{position:absolute;bottom:45px;font-size:10px;letter-spacing:.28em;color:#b5cbb2}
+.home-section-title h2{font-size:35px}
+.home-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:-15px}
+.home-action{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:30px;min-height:235px;color:var(--ink);transition:transform .2s,border-color .2s,box-shadow .2s}
+.home-action:hover{color:var(--ink);transform:translateY(-3px);border-color:#adc9a9;box-shadow:0 16px 35px #213a2810}
+.home-action__number{color:#748576;font-size:10px;font-weight:800;letter-spacing:.15em}
+.home-action__icon{position:absolute;right:30px;top:28px;font-size:22px;color:#4c7352}
+.home-action strong{font-size:23px;letter-spacing:-.045em;margin-top:37px}
+.home-action p{color:var(--muted);font-size:13px;line-height:1.6;margin-top:8px;max-width:330px}
+.home-action__bottom{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;margin-top:auto;padding-top:23px;color:#365c3e}
+.home-footnote{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.home-footnote__dot{width:7px;height:7px;background:#6a9c70;border-radius:50%}
+@media(max-width:800px){.navbar{gap:12px;flex-wrap:wrap}.navbar__links{order:3;width:100%;justify-content:space-between;flex-wrap:nowrap;overflow-x:auto}.navbar__links a{padding:9px 10px}.navbar__user{margin-left:auto}.who{display:none}.home-hero{grid-template-columns:1fr}.home-hero__graphic{display:none}.home-hero__content{padding:37px 28px}.home-actions{grid-template-columns:1fr}.home-hero{min-height:0}}
+@media(max-width:480px){.navbar__brand{font-size:18px}.navbar__user .btn{padding:7px 10px;font-size:11px}.container{padding:22px 16px}.home-action{min-height:215px;padding:23px}}
+@media(prefers-reduced-motion:reduce){.home-action,.store-card,.store-add,.store-checkout{transition:none}}

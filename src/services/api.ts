@@ -6,7 +6,7 @@ import { apiRequest, loginRequest } from "../auth/authConfig";
 // Cliente HTTP centralizado (SDD §16).
 // baseURL apunta al API Gateway mediante variable de entorno (Paso 20).
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || "/api",
 });
 
 // Interceptor de request: adquiere el token silenciosamente y adjunta
