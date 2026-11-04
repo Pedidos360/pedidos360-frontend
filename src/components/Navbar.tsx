@@ -22,7 +22,7 @@ export default function Navbar() {
 
       <nav className="navbar__links">
         <NavLink to="/home">Inicio</NavLink>
-        <NavLink to="/productos">Productos</NavLink>
+        <NavLink to="/productos">Tienda</NavLink>
         <NavLink to="/pedidos">Pedidos</NavLink>
         {hasRole("Admin") && <NavLink to="/admin">Administración</NavLink>}
       </nav>
@@ -33,7 +33,7 @@ export default function Navbar() {
           <span className="who__name">{nombre}</span>
           {roles.length > 0 && <span className="role-badge">{roles.join(" · ")}</span>}
         </div>
-        <button className="btn btn-ghost" onClick={logout}>Salir</button>
+        <button className="btn btn-ghost" onClick={logout}>Cerrar sesión ↗</button>
       </div>
     </header>
   );
